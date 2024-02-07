@@ -7,11 +7,8 @@ build
 # Ignore IDE project settings directory.
 .idea
 
-# Ignore project builds directory 
-bin
-
 # Ignore errors log files
 .log
 
-# Ignore run-velocity/paper cache directory
+# Ignore run-velocity cache directory
 run
