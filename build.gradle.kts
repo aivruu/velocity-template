@@ -1,18 +1,61 @@
 plugins {
     `java-library`
-    id("template-checkstyle") apply false
-    id("template-spotless") apply false
+    checkstyle
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.blossom)
+    alias(libs.plugins.run.velocity)
+    alias(libs.plugins.spotless)
 }
 
-subprojects {
-    apply<JavaLibraryPlugin>()
+val group = property("group") as String
+// Indicates the version string for the current branch.
+val version = property("version") as String
 
-    apply(plugin = "template-checkstyle")
-    apply(plugin = "template-spotless")
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+tasks {
+    build {
+        dependsOn(shadowJar)
+    }
+    compileJava {
+        options.encoding = Charsets.UTF_8.name()
+        options.release.set(17)
+    }
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
+    }
+    spotless {
+        java {
+            licenseHeaderFile(rootProject.file("HEADER.txt"))
         }
     }
+    checkstyle {
+        configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+        maxErrors = 0
+        maxWarnings = 0
+        toolVersion = libs.checkstyle.get().version.toString()
+    }
+    runVelocity {
+        velocityVersion(libs.versions.velocity.get())
+    }
+}
+
+blossom {
+    replaceToken("{version}", version, "src/main/java/io/github/aivruu/template/Constants.java")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+}
+
+dependencies {
+    compileOnly(libs.velocity)
+}
+
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
