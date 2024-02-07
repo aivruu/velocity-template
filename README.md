@@ -1,2 +1,2 @@
-# plugin-template
-A Template for advanced Paper/Velocity plugins creation.
+# velocity-template
+A simple template for Velocity plugins creation.
