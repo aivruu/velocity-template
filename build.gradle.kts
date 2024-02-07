@@ -41,7 +41,7 @@ tasks {
 }
 
 blossom {
-    replaceToken("{version}", version, "src/main/java/io/github/aivruu/template/Constants.java")
+    replaceToken("{version}", version, "src/main/java/me/qeklydev/template/Constants.java")
 }
 
 publishing {
