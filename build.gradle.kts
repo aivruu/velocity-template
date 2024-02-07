@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    `maven-publish`
     checkstyle
     alias(libs.plugins.shadow)
     alias(libs.plugins.blossom)
