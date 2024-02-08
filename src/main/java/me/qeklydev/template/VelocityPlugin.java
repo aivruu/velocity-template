@@ -31,23 +31,23 @@ import org.slf4j.Logger;
 import java.nio.file.Path;
 
 @Plugin(
-	  id = "velocity-plugin-template",
-	  name = "VelocityPluginTemplate",
-	  description = "A Velocity Plugin Template",
-	  version = Constants.VERSION,
-	  authors = { "Qekly" }
+    id = "velocity-plugin-template",
+    name = "VelocityPluginTemplate",
+    description = "A Velocity Plugin Template",
+    version = Constants.VERSION,
+    authors = { "Qekly" }
 )
 public final class VelocityPlugin {
-	@Inject
-	private Logger logger;
-	@Inject
-	@DataDirectory
-	private Path pluginFolder;
-	@Inject
-	private Injector injector;
-	
-	@Subscribe
-	void onProxyInitialization(final ProxyInitializeEvent event) {
-		logger.info("Stating Velocity plugin template");
-	}
+  @Inject
+  private Logger logger;
+  @Inject
+  @DataDirectory
+  private Path pluginFolder;
+  @Inject
+  private Injector injector;
+  
+  @Subscribe
+  void onProxyInitialization(final ProxyInitializeEvent event) {
+    logger.info("Stating Velocity plugin template");
+  }
 }
